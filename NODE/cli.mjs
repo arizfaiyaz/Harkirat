@@ -1,7 +1,6 @@
 import { Command } from "commander";
 import fs from "fs";
-import path from "path";
-import os from "os";
+
 
 const program = new Command();
 

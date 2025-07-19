@@ -1,1 +1,3 @@
-i am ariz fai yaz
+i am ariz faiyaz;
+
+my fname + lname;
