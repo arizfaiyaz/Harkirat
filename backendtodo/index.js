@@ -59,4 +59,51 @@ app.delete('/todos/delete/all', (req, res) => {
     res.send("All todos deleted succesfully");
 });
 
+/**
+ * create a route handler for PUT (Update) request
+ *
+ * Update the todos with the given id in the array
+ *
+ * URL: localhost:3000/todo/update/:id
+ * Example: localhost:3000/todo/update/1
+ */
+app.put('/todos/update/:id',(req, res) => {
+    const { todo} = req.body;
+    const todoId = parseInt(req.params.id);
+    if(!todo || todo.trim() === ""){
+        return res.send("Todo cannot be empty");
+    }
+    let updated = false;
+    for (let i =0; i < todos.length; i++){
+        if(todos[i].id === todoId){
+            todos[i].title = todo;
+            updated = true;
+            break;
+        }
+    }
+    if(!updated){
+        return res.send("Todo with id" 
+            + todoId + "not found"
+        )};
+    res.send("Todo updated succesfuly with id " + todoId);
+})
+app.get('/todos/read/all', (req, res) => {
+    if(todos.lenth === 0){
+        return res.send("No todos found");
+    }
+    res.send(todos);
+});
 
+app.get("/todos/read/:id", (req, res) =>{
+    const todoId = parseInt(req.params.id);
+    const todo = todos.find((todo) => todo.id === todoId);
+    if(!todo){
+        return res.send("Todo with id " + todoId + " not found");
+    }
+    res.send(todo);
+});
+
+// Start the server on the Port 3000
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
