@@ -8,6 +8,7 @@ const app = express();
 //Middleware to parse the JSON data in the req body
 app.use(express.json());
 
+
 const todoFilePath = path.join(__dirname, "todosData.json");
 
 const readTodosfromFile = () => {
