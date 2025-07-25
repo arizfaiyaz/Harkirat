@@ -6,13 +6,15 @@
     <title>Document</title>
     <script src="http://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script>
-        function sendRequest() {
+        async function sendRequest() {
             const a = document.getElementById('a').value;
             const b = document.getElementById('b').value;
-            axios.post("http://localhost:3000/sum", {
+            const response = await axios.post("http://localhost:3000/sum", {
                a: a,
                b: b
             })
+            console.log(response.data);
+            
         }
     </script>
 </head>
