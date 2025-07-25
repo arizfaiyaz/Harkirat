@@ -8,6 +8,8 @@ function logRequest(req, res, next){
     next();
 }
 app.use(logRequest);
+
+
 app.get('/sum', (req, res) => {
     const { a, b } = req.query;
     const sum = parseInt(a) + parseInt(b);
@@ -34,3 +36,4 @@ app.get('/divide', (req, res) => {
 });
 
 app.listen(3000);
+
