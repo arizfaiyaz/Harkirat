@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+app.use(express.json());
 
 app.post('/sum', (req, res) => {
     const a = parseInt(req.body.a);
@@ -8,4 +9,6 @@ app.post('/sum', (req, res) => {
     res.json({
         answer: a + b
     })
-})
+});
+
+app.listen(3000);
