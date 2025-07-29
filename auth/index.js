@@ -78,9 +78,9 @@ app.get('/me', (req, res) => {
     } else {
         res.json({
             message: "Token invalid"
-        })
+        });
     }
-})
+});
 
 app.listen(3000); // listening on port 3000
 
