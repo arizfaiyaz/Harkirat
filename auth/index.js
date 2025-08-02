@@ -8,6 +8,7 @@ app.use(express.json()); // to parse JSON bodeis
 const users = []; // in-memory user storage;
 
 
+
 app.post('/signup', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -81,6 +82,7 @@ app.get('/me', (req, res) => {
         });
     }
 });
+
 
 app.listen(3000); // listening on port 3000
 
