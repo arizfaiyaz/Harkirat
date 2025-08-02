@@ -9,7 +9,7 @@ const users = []; // in-memory user storage;
 
 
 
-app.post('/signup', (req, res) => {
+/*app.post('/signup', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     
@@ -87,3 +87,5 @@ app.get('/me', (req, res) => {
 app.listen(3000); // listening on port 3000
 
 // 1dlgq4iuz605vb3fvrzp7yiq2vwc8oua
+
+*/
