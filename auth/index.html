@@ -18,7 +18,6 @@
         alert("you are signed in")
 
     }
-
     async function signin(){
         const username = document.getElementById("signin-username").value;
         const password = document.getElementById("signin-password").value;
@@ -32,8 +31,21 @@
         alert("you are signed in")
 
     }
+    async function getUserInfo(){
+       const response = await axios.get('http://localhost:3000/me', {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        })
+        document.getElementById("information").innerHTML = "Username: " + response.data.username + "Password: " + response.data.password;
+    }
+    getUserInfo();
 
-
+    function logout(){
+        localStorage.removeItem("token");
+        document.getElementById("information").innerHTML = "";
+        alert("you are logged out")
+    }
 </script>
 <body>
     <div>
@@ -54,8 +66,8 @@
     <div>User Info:
         <div id="information"></div>
     </div>
-    <div onclick="logout()">
-        Logout
+    <div>
+        <button onclick="logout()">Logout</button>
     </div>
 </body>
 </html>
