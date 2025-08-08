@@ -1,10 +1,12 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 const path = require('path');
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 const users = [];
 const todos = [];
@@ -42,7 +44,7 @@ app.post('/signup', (req, res) => {
 });
 
 // signin route to auth a user
-app.post('signin', (req, res) => {
+app.post('/signin', (req, res) => {
     const { username, password} = req.body;
 
     if(!username || !password){
@@ -69,6 +71,7 @@ app.post('signin', (req, res) => {
             token, message: "Signed in successfully"
         });
     } 
+    console.log("User signed in:", foundUser);
 });
 
 // Middleware func to authenticate the user based on the token
@@ -90,7 +93,7 @@ app.post('signin', (req, res) => {
     }
  }
 
- // route to get all To=dos for the auth user
+ // route to get all To-dos for the auth user
 
  app.get('/todos', auth, (req, res) => {
     // Get the username from the req obj
@@ -134,7 +137,7 @@ app.put('/todos/:id', auth, (req, res) => {
     const { id } =req.params;
     const { title } = req.body;
     const currentUser = req.username;
-    const todo = todos.find(t => t.id === parseInt(id) && todo.username === currentUser);
+    const todo = todos.find(t => t.id === parseInt(id) && t.username === currentUser);
     
     // check if the todo is not found
     if(!todo){
@@ -144,7 +147,7 @@ app.put('/todos/:id', auth, (req, res) => {
     }
     if(!title){
         return res.json({
-            message: "title not found"
+            message: "Title is required"
         });
     }
     todo.title = title; // update the title of the todo
@@ -157,7 +160,7 @@ app.put('/todos/:id', auth, (req, res) => {
 app.delete('/todos/:id', auth, (req, res) => {
     const { id} = req.params;
     const currentUser = req.username;
-    const todoIndex = todos.findIndex(t => t.id === parseInt(id) && todos.username === currentUser);
+    const todoIndex = todos.findIndex(t => t.id === parseInt(id) && t.username === currentUser);
 
     // Check if the todo is not found
     if(todoIndex === -1){
