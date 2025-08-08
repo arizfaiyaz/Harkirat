@@ -79,7 +79,9 @@ app.post('/signin', (req, res) => {
     if(user){
         const token = jwt.sign({
             username: user.username
-        }, JWT_SECRET);
+        }, JWT_SECRET, {
+            expiresIn: "1h"
+        });
         
         // user.token = token; // store the token in the user (no need for this as we are not storing it in jwt and it is stateless)
 
