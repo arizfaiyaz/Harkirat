@@ -4,6 +4,8 @@ const JWT_SECRET = "myjwtsecretisthisokay"
 const { UserModel, TodoModel } = require('./db.js');
 const mongoose = require('mongoose');
 const app = express();
+const bcrypt = require('bcrypt');
+
 mongoose.connect("mongodb+srv://arizfaiyazwork:ariz2001@cluster0.yxdy6ci.mongodb.net/Todo-db");
 
 app.use(express.json());
@@ -11,10 +13,11 @@ app.use(express.json());
 app.post('/signup', async (req, res) => {
     const { email, password, name } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 5);
     try {
     await UserModel.create({
         email: email,
-        password: password,
+        password: hashedPassword, // store hashed password
         name: name
     })
 
