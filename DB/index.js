@@ -8,10 +8,11 @@ mongoose.connect("mongodb+srv://arizfaiyazwork:ariz2001@cluster0.yxdy6ci.mongodb
 
 app.use(express.json());
 
-app.post('/signup', (req, res) => {
+app.post('/signup', async (req, res) => {
     const { email, password, name } = req.body;
 
-    UserModel.create({
+    try {
+    await UserModel.create({
         email: email,
         password: password,
         name: name
@@ -19,11 +20,18 @@ app.post('/signup', (req, res) => {
 
     res.json({
         message: "you are signed up"
+    });
+} catch (error) {
+    res.status(500).json({
+        message: "User already signed up!!"
     })
+}
 });
 
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
+
+    try {
     const user = await UserModel.findOne({
         email: email,
         password: password
@@ -31,7 +39,7 @@ app.post('/signin', async (req, res) => {
     console.log(user);
     if(user) {
         const token = jwt.sign({ 
-            id: user._id
+            id: user._id.toString()
         }, JWT_SECRET)
         res.json({
             message: "User signed in",
@@ -41,6 +49,11 @@ app.post('/signin', async (req, res) => {
         res.status(403).json({
             message: "User not found"
         })
+    }
+} catch (error) {
+    res.status(500).json({
+        message: "An error accoured during signin"
+    })
     }
 });
 
