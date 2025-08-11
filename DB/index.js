@@ -44,7 +44,8 @@ app.post('/signin', async (req, res) => {
             message: "User not found"
         });
     }
-    
+
+
     const passwordMatch = bcrypt.compare(password, user.password);
 
     console.log(user);
