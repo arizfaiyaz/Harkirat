@@ -5,13 +5,26 @@ const { UserModel, TodoModel } = require('./db.js');
 const mongoose = require('mongoose');
 const app = express();
 const bcrypt = require('bcrypt');
-
+const { z } = require('zod');
 
 mongoose.connect("mongodb+srv://arizfaiyazwork:ariz2001@cluster0.yxdy6ci.mongodb.net/Todo-db");
 
 app.use(express.json());
 
 app.post('/signup', async (req, res) => {
+    const requiredBody = z.object({
+        email: z.string(),
+        name: z.string(),
+        password: z.string()
+
+    })
+    /* req.body
+    // {
+    //   email: string
+    //   password: string
+    //  }
+    // input validation using zod
+    */
     const { email, password, name } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 5);
@@ -44,7 +57,6 @@ app.post('/signin', async (req, res) => {
             message: "User not found"
         });
     }
-
 
     const passwordMatch = bcrypt.compare(password, user.password);
 
