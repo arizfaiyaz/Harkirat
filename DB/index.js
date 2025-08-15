@@ -25,10 +25,13 @@ app.post('/signup', async (req, res) => {
     //  }
     // input validation using zod
     */
+   // parsing data by using .safeParse(req.body)
+   // 1. how to show errors to the user
    const parsedData = requiredBody.safeParse(req.body);
    if(!parsedData.success){
      return res.json({
-        message: "Invalid input"
+        message: "Invalid input",
+        error: parsedData.error
      })
    }
     const { email, password, name } = req.body;
