@@ -1,5 +1,6 @@
-const Router =  express.Router();
-const courseRouter = Router();
+const express = require('express');
+const courseRouter =  express.Router();
+
 
 courseRouter.post('/purchase', (req, res) => {
     // you would expect the user to pay you the money
