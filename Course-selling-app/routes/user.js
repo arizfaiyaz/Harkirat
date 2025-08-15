@@ -1,7 +1,7 @@
 const express = require('express');
-const Router = express.Router();
+const userRouter = express.Router();
 
-const userRouter = Router();
+
 
 userRouter.post('/signup', (req, res) => {
 
