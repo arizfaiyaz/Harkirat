@@ -13,9 +13,9 @@ app.use(express.json());
 
 app.post('/signup', async (req, res) => {
     const requiredBody = z.object({
-        email: z.string(),
-        name: z.string(),
-        password: z.string()
+        email: z.email(),
+        name: z.string().min(1).max(50),
+        password: z.string().min(8).max(20)
 
     })
     /* req.body
@@ -25,6 +25,12 @@ app.post('/signup', async (req, res) => {
     //  }
     // input validation using zod
     */
+   const parsedData = requiredBody.safeParse(req.body);
+   if(!parsedData.success){
+     return res.json({
+        message: "Invalid input"
+     })
+   }
     const { email, password, name } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 5);
