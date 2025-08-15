@@ -15,7 +15,7 @@ app.post('/signup', async (req, res) => {
     const requiredBody = z.object({
         email: z.email(),
         name: z.string().min(1).max(50),
-        password: z.string().min(8).max(20)
+        password: z.string().min(8).max(20).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
 
     })
     /* req.body
