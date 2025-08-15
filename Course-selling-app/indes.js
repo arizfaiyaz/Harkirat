@@ -1,44 +1,17 @@
 const express = require('express');
 const jsonwebtoken = require('jsonwebtoken');
 const { z } = require('zod');
-
+const router = express.Router();
 const app = express();
+const { createUserRoutes } = require('./routes/user.js');
+const { createCourseRoutes } = require('./routes/course.js');
 
-app.post('/user/signup', (req, res) => {
-
-    res.json({
-        message: "User signed up successfully"
-    })
-});
-
-app.post('/user/signin', (req, res) => {
-    res.json({
-        message: "User signin up successfully"
-    })
-});
-
-app.post('/user/purchases', (req, res) => {
-    res.json({
-        message: "purchase endpoint"
-    })
-});
-
-app.post('/course/purchase', (req, res) => {
-    res.json({
-        message: "course endpoint"
-    })
-});
+app.use("/user", userRouter);
+app.use("/course", courseRouter);
 
 
-app.get('/courses', (req, res) => {
-    res.json({
-        message: "course endpoint"
-    })
-});
-
-
-
-
+createUserRoutes(app);
+createCourseRoutes(app);
 
 
 app.listen(3000);
