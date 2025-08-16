@@ -1,10 +1,11 @@
+//Import mongoose to interact with mongodb
 const mongoose = require('mongoose');
 
-
-
+// Use schema and ObjectId from mongooose for creqating models
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
 
+// Define User Schema
 const UserSchema = new Schema({
 
     email: {
@@ -26,6 +27,7 @@ const UserSchema = new Schema({
     }
 });
 
+// Define AdminSchema
 const AdminSchema = new Schema({
 
     email: {
@@ -47,6 +49,7 @@ const AdminSchema = new Schema({
     }
 });
 
+// Define the CourseSchema
 const CourseSchema = new Schema({
     title: {
         type: String,
