@@ -1,12 +1,13 @@
 const express = require('express');
-const jsonwebtoken = require('jsonwebtoken');
 const { userRouter } = require('./routes/user.js');
 const { courseRouter } = require('./routes/course.js');
+const { adminRouter } = require('./routes/admin.js');
 
 const app = express();
 
-app.use("/user", userRouter);
-app.use("/course", courseRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/admin", adminRouter);
 
 
 app.listen(3000);
