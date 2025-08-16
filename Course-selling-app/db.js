@@ -8,20 +8,20 @@ const ObjectId = mongoose.ObjectId;
 const UserSchema = new Schema({
 
     email: {
-        string: true,
+        type: String,
         required: true,
         unique: true,
     },
     password: {
-        string: true,
+        type: String,
         required: true,
     },
     firstName: {
-        string: true,
+        type: String,
         required: true,
     },
     lastName: {
-        string: true,
+        type: String,
         required: true,
     }
 });
@@ -29,48 +29,47 @@ const UserSchema = new Schema({
 const AdminSchema = new Schema({
 
     email: {
-        string: true,
+        type: String,
         required: true,
         unique: true,
     },
     password: {
-        string: true,
+        type: String,
         required: true,
     },
     firstName: {
-        string: true,
+        type: String,
         required: true,
     },
     lastName: {
-        string: true,
+        type: String,
         required: true,
     }
 });
 
 const CourseSchema = new Schema({
     title: {
-        string: true,
+        type: String,
         required: true,
     },
     description: {
-        string: true,
+        type: String,
         required: true,
     },
     price: {
-        number: true,
+        type: Number,
         required: true,
     },
     imageUrl: {
-        string: true,
+        type: String,
         require: true,
     },
     createrId: ObjectId,
 });
 
 const PurchaseSchemma = new Schema({
-    purchase_id: ObjectId,
-    course_id: ObjectId,
-    user_id: ObjectId,
+    userId: ObjectId,
+    courseId: ObjectId,
 });
 
 
