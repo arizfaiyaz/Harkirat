@@ -14,12 +14,22 @@ adminRouter.post('/signup', async (req, res) => {
         lastName: z.string().min(0).max(30)
     });
     const result = requiredbody.safeParse(req.body);
+    if(!result.success){
+        return res.status(400).json({
+            message: "Invalid request body"
+        });
+    }
+    const { email, password, firstName, lastName } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 5);
     try {
     await userModel.create({
-        email: result.data.email,
-        password: result.data.password,
-        firstName: result.data.firstName,
-        lastName: result.data.lastName
+        email: email,
+        password: hashedPassword,
+        firstName: firstName,
+        lastName: lastName
+    })
+    res.json({
+        message: "signup successful"
     })
 } catch (error) {
     console.log(error);
@@ -27,18 +37,16 @@ adminRouter.post('/signup', async (req, res) => {
         message: "Internal server error"
     });
 }
-    res.json({
-        message: "signup endpoint"
-    })
+
 });
 
 adminRouter.post('/signin', (req, res) => {
     res.json({
-        message: "signin endpoint"
+        message: "signin"
     })
 });
 
- adminRouter.use(adminMiddleware);
+// adminRouter.use(adminMiddleware);
 
 adminRouter.post('/course', (req, res) => {
     res.json({

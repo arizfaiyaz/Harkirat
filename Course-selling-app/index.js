@@ -24,6 +24,7 @@ require('dotenv').config();
 
 // Initialize express app
 const app = express();
+app.use(express.json());
 
 // use the routes with a base API path 
 app.use("/api/v1/user", userRouter); // all user-related routes
