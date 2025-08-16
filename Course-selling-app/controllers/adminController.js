@@ -5,7 +5,7 @@ const z = require('zod');
 
 // Admin signup
 
-async function adminignup(req, res) {
+async function adminSignup(req, res) {
     const schema = zod.object({
         email: z.email().min(5),
         password: z.string().min(5),
@@ -145,5 +145,57 @@ async function updateCourse(req, res) {
             price: price || course.price
         }
     );
-
+    res.json({
+        message: "Course update successfully"
+    });
 }
+
+// Delete Course
+async function deleteCourse(req, res) {
+    const schema = z.object({
+        courseId: z.string().min(5),
+    });
+
+    const result = schema.safeParse(req.body);
+    if(!result.success) {
+        return res.json({
+            message: "Incorrect data format", error: result.error
+        })
+    }
+    const { courseId } = req.body;
+    const course = await courseModel.findOne({
+        _id: courseId, createrId: req.adminId,
+    });
+    if(!course) {
+        return res.json({
+            message: "Course not found!"
+        });
+    }
+
+    await courseModel.deleteOne({
+
+        _id: courseId, createrId: req.adminId
+    });
+    return res.json({
+        message: "course deleted succesfully"
+    });
+};
+
+// Get all the Courses
+async function getAllCourse(req, res) {
+    const courses = await courseModel.find({
+        createrId: req.adminId
+    });
+    return res.json({
+        courses
+    });
+};
+
+module.exports = {
+    adminSignup,
+    adminSignin,
+    createCourse,
+    updateCourse,
+    deleteCourse,
+    getAllCourse,
+}; 
