@@ -41,3 +41,109 @@ async function adminignup(req, res) {
 };
 
 // Admin signin
+async function adminSignin(req, res) {
+    const schema = z.object({
+        email: z.email(),
+        password: z.string().min(6),
+    });
+    const result = schema.safeParse(req.body);
+    if(!result.success) {
+        return res.json({
+            message: "Incorrect data format", error: result.error
+        })
+    }
+
+    const { email, password } = req.body;
+    const admin = await adminModel.findOne({ email});
+
+    if(!admin) {
+        return res.json({
+            message: "admin not found"
+        });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, admin.password);
+
+    if(passwordMatch){
+        req.session.adminId = admin._id;
+        res.json({
+            message: "Signin Successful!"
+        });
+    } else {
+        res.json({
+            message: "Incorrect password"
+        });
+    }
+}
+
+// Create Course
+async function createCourse(req, res) {
+    const schema = z.object({
+        title: zod.string().min(5),
+        description: z.string().min(30).max(150),
+        imageUrl: z.string().url(),
+        price: z.number().positive(),
+    });
+
+    const result = schema.safeParse(req.body);
+
+    if(!result.success) {
+        return res.json({
+            message: "incorrect data format", error: result.error
+        });
+    }
+    const { title, description, imageUrl, price } = req.body;
+
+    const course = await courseModel.create({
+        title,
+        description,
+        imageUrl,
+        price,
+        createrId: req.adminId,
+    });
+
+    return res.json({
+        message: "Course created!", courseId: course._Id 
+    });  
+}
+
+// Update course
+
+async function updateCourse(req, res) {
+    const schema = z.object({
+        courseId: z.string().min(5),
+        title: z.string().min(5).optional(),
+        description: z.string().min(30).max(150).optional(),
+        imageUrl: z.string().url().optional(),
+        price: z.number().positive().optional(),
+    });
+
+    const result = schema.safeParse(req.body);
+    if(!result.success) {
+        return res.json({
+            message: "incorrect data format", error: result.error
+        });
+    }
+
+    const { courseId, title, description, imageUrl, price } = req.body;
+    const course = await courseModel.findOne({
+        _id: courseId, 
+        createrId: res.adminId
+    });
+    if(!course) {
+        return res.json({
+            message: "Course not found!"
+        });
+    }
+
+    await courseModel.updateOne(
+        { _id: courseId, createrId: req.adminId },
+        {
+            title: title || course.title,
+            description: description || course.description,
+            imageUrl: imageUrl || course.imageUrl,
+            price: price || course.price
+        }
+    );
+
+}
