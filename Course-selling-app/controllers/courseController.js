@@ -37,3 +37,23 @@ async function purchaseCourse(req, res) {
 }
 
 // Preview Course
+
+async function previewCourse(req, res) {
+    try {
+        const course = await courseModel.find({});
+        res.json({
+            course: course,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "an error occured while fetching course",
+            error: error.message,
+        });
+    }
+}
+
+
+module.exports = {
+    purchaseCourse,
+    previewCourse,
+};
