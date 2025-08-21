@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { email } = require('zod');
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -8,5 +8,22 @@ const UserSchema = new Schema({
         required: true,
         unique: true,   
     },
-    
+    password: {
+        type: String,
+        required: true,
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+    },
 })
+
+const usermodel = mongoose.model('user', UserSchema);
+
+module.exports = {
+    UserSchema
+}
