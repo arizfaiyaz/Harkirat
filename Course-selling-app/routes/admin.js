@@ -1,72 +1,29 @@
-const express = require('express');
-const adminRouter = express.Router();
-const { adminModel, userModel } = require('../db.js');
-const { z, email } = require('zod');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const { Router } = require('express');
+const { adminMiddleware } = require('../middleware/adminMiddleware');
+const adminController = require("../controllers/adminController");
 
+// Create a new instance of Router
+const adminRouter = Router();
 
-adminRouter.post('/signup', async (req, res) => {
-    const requiredbody = z.object({
-        email: z.email(),
-        password: z.string().min(8).max(30).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
-        firstName: z.string().min(3).max(30),
-        lastName: z.string().min(0).max(30)
-    });
-    const result = requiredbody.safeParse(req.body);
-    if(!result.success){
-        return res.status(400).json({
-            message: "Invalid request body"
-        });
-    }
-    const { email, password, firstName, lastName } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 5);
-    try {
-    await userModel.create({
-        email: email,
-        password: hashedPassword,
-        firstName: firstName,
-        lastName: lastName
-    })
-    res.json({
-        message: "signup successful"
-    })
-} catch (error) {
-    console.log(error);
-    res.status(500).json({
-        message: "Internal server error"
-    });
-}
+// Admin signup Route
+adminRouter.post('/signup', adminController.adminSignup);
 
-});
+// Admin Signiin Route
+adminRouter.post('/signin', adminController.adminSignin);
 
-adminRouter.post('/signin', (req, res) => {
-    res.json({
-        message: "signin"
-    })
-});
+// Create Course Route
+adminRouter.post('/course', adminMiddleware,adminController.createCourse);
 
-// adminRouter.use(adminMiddleware);
+// Update a course Route
+adminRouter.put('/course', adminMiddleware, adminController.updateCourse);
 
-adminRouter.post('/course', (req, res) => {
-    res.json({
-        message: "course created endpoint"
-    })
-});
+// Delete a Course Route
+adminRouter.delete('/course', adminMiddleware, adminController.deleteCourse);
 
-adminRouter.put('/course', (req, res) => {
-    res.json({
-        message: "course created endpoint"
-    })
-});
+// Get all course Route
+adminRouter.get('/course/bulk', adminMiddleware, adminController.getAllCourse);
 
-
-adminRouter.get('/course/all', (req, res) => {
-    res.json({
-        message: "course created endpoint"
-    })
-});
 
 module.exports = {
-    adminRouter: adminRouter
+    adminRouter,
 };

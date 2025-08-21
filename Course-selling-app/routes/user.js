@@ -1,30 +1,23 @@
-const express = require('express');
-const userRouter = express.Router();
-const { userModel } = require('../db.js');
+const { Router } = require('express');
+const { userMiddleware }= require('../middleware/userMiddleware');
+const userController = require('../controllers/userController');
 
+// Create a Router instance 
+const userRouter = Router();
 
+// User signup Route 
+userRouter.post('/signup', userController.userSignup);
 
-userRouter.post('/signup', (req, res) => {
+// User signin Route
+userRouter.post('/signin', userController.userSignin);
 
-    res.json({
-        message: "User signed up successfully"
-    })
-});
+// User Signout Route
+userRouter.post('/signout', userController.userSignout);
 
-userRouter.post('/signin', (req, res) => {
-    res.json({
-        message: "User signin up successfully"
-    })
-});
-
-userRouter.post('/purchases', (req, res) => {
-    res.json({
-        message: "purchase endpoint"
-    })
-});
-
+// Get User Purchase Route
+userRouter.get('/purchases', userMiddleware, userController.getUserPurchases);
 
 
 module.exports = {
-    userRouter: userRouter
+    userRouter,
 }

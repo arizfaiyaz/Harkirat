@@ -1,23 +1,19 @@
-const express = require('express');
-const courseRouter =  express.Router();
-const { courseModel } = require('../db.js');
+const { Router } = require('express');
+const courseController = require('../controllers/courseController');
+const { userMiddleware } = require('../middleware/userMiddleware');
 
-courseRouter.post('/purchase', (req, res) => {
-    // you would expect the user to pay you the money
-    res.json({
-        message: "course endpoint"
-    })
-});
+const {userSessionMiddleware} = require('../middleware/userSessionMiddleware');
 
+// Create a new router instance for course routes
+const courseRouter = Router();
 
-courseRouter.get('/preview', (req, res) => {
-    res.json({
-        message: "course endpoint"
-    })
-});
+// Route to purchase a course with user authentication
+courseRouter.post('/purchse', userSessionMiddleware, userMiddleware, courseController.purchaseCourse);
 
+// route to preview available courses without authentication
+courseRouter.get('/preview', courseController.previewCourse);
 
 
 module.exports = {
-    courseRouter: courseRouter
+    courseRouter,
 }
