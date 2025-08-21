@@ -48,4 +48,37 @@ async function userSignup(req, res) {
     }
 }
 
-// User login
+// User Signin
+async function userSignin(res, res) {
+    const schema = z.object({
+        email: z.email(),
+        password: z.string().min(5),
+    });
+
+    const result = schema.safeParse(req.body);
+    if(!result.success){
+        return res.json({
+            message: "Invalid credentials",
+        });
+    }
+    const { email, password } = req.body;
+    const user = await userModel.findOne({email});
+    
+    if(!user) {
+        return res.json({
+            message: "User not found",
+        });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if(passwordMatch) {
+        req.session.userId = user._id;
+        res.json({
+             message: "Signin Successful!",
+        });
+    } else {
+        res.status(403).json({
+            message: "Invalid credentials",
+        });
+    }
+}
+
