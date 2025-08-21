@@ -111,7 +111,7 @@ async function getUserPurchases(req, res) {
 
     if(!purchases.length){
         return res.json({
-            message:"No purchases found";
+            message:"No purchases found",
         });
     }
     const purchasesCourseIds = purchases.modifiedPaths(purchase => purchase.courseId);
