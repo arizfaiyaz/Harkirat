@@ -24,6 +24,9 @@ require('dotenv').config();
 
 // Initialize express app
 const app = express();
+const PORT = process.env.PORT || 3000;
+const MONGO_URL = process.env.MONGO_URL;
+
 app.use(express.json());
 
 // use the routes with a base API path 
@@ -32,22 +35,17 @@ app.use("/api/v1/course", courseRouter); // All course related routes
 app.use("/api/v1/admin", adminRouter); // all admin- related routes
 
 
-const connectDb = async () => {
+async function main() {
     try {
-        await mongoose.connect(`${process.env.MONGO_URL}`);
-        console.log("Connected to the database successsful");
+        await mongoose.connect(MONGO_URL);
+        console.log("Connected to MongoDB successfully");
 
-        const port = process.env.PORT || 3000;
-
-        app.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
-        })
-        
+        app.listen(PORT, () => {
+            console.log(`Server is running on port${PORT}`);
+            
+        });
     } catch (error) {
-        console.error("connection to db failed");
-        process.exit(1);
+        console.log("Failed to connect to Mongodb", error);
     }
-};
-
-
-connectDb();
+}
+main();
