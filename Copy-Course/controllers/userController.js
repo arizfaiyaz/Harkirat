@@ -114,6 +114,7 @@ async function getUserPurchases(req, res) {
             message:"No purchases found",
         });
     }
+    
     const purchasesCourseIds = purchases.modifiedPaths(purchase => purchase.courseId);
     const courseData = await courseModel.find({
         _id: { $in: purchasesCourseIds}
