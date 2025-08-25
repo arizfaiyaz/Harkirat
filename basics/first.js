@@ -39,10 +39,10 @@ console.log(answer);
 
 // Filter
 // what if i tell u, giev an array input, give me back all the even values from it
-// const arr =[1,2,3,4,5,6,7,8,9];
-// const newArr = [];
-// for (let i = 0; i < arr.length; i++) {
-//     if(arr[i] % 2 === 0){
+const arr =[1,2,3,4,5,6,7,8,9];
+ const newArr = [];
+for (let i = 0; i < arr.length; i++) {
+     if(arr[i] % 2 === 0){
 //         newArr.push(arr[i]);
 //     }
 // }
