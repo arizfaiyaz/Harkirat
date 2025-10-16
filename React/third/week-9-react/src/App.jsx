@@ -6,6 +6,11 @@ function App() {
       <div style={{background: "#dfe6e9", height: "100vh"}}>
         <div style={{display: "flex", justifyContent: "center"}}>
         <PostComponent />
+        <br />
+        <PostComponent />
+        <br />
+        <PostComponent />
+        <br />
         </div>
       </div>
     </>
@@ -23,14 +28,12 @@ const style = {
 
 function PostComponent() {
   return (
-    <>
     <div style={style}>
     <div style={{display: "flex"}}>
       <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjxhOxB-AhzpZ5M55ItVi7vEVt__zg0W4-hw&s"} style={{
         width: 50,
         height: 50,
         borderRadius:40,
-        display: "flex"
       }} />
     </div>
     <div style={{fontSize:10, margin: 5}}>
@@ -44,7 +47,7 @@ function PostComponent() {
         Want to know how to win big? Check out how these folks won $500 in bounties.
     </div>
     </div>
-    </>
+
   )
 
 }
