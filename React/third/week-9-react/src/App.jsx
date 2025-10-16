@@ -4,6 +4,12 @@ function App() {
   return (
     <>
       <div style={{background: "#dfe6e9", height: "100vh"}}>
+        <div style={{
+          display: "flex", justifyContent: "left"
+        }}>
+          <ProfileComponent />
+        </div>
+        
         <div style={{display: "flex", justifyContent: "center"}}>
         <PostComponent />
         <br />
@@ -51,6 +57,33 @@ function PostComponent() {
   )
 
 }
+
+function ProfileComponent() {
+  return (
+    <>
+    <div style={{...style, margin: 20, padding: 20}}>
+      <div>
+      <img src={"https://media.licdn.com/dms/image/v2/D5603AQGrviB87d0pdw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1720365156652?e=1763596800&v=beta&t=aK55sUyNvNl9U98al-w9MvgqgSbDPpLtAsC4w5PZP_8"}
+      style={{
+        width:50,
+        height: 50,
+        borderRadius: 10,
+        display: "flex",
+        justifyContent: "center",
+        marginBottom:10,
+      }}/>
+      </div>
+      <div>
+        <b>
+          Ariz Faiyaz
+        </b>
+        <div>Profile Views: 23000</div>
+      </div>
+    </div>
+    </>
+  )
+}
+
 
 export default App
 // structuring ur app into components
