@@ -1,9 +1,11 @@
+import { useState } from "react"
 
 function App() {
 
   return (
     <>
       <div style={{background: "#dfe6e9", height: "100vh"}}>
+        <ToggleMessage />
         <div style={{
           display: "flex", justifyContent: "left"
         }}>
@@ -22,6 +24,26 @@ function App() {
     </>
   )
 }
+
+const ToggleMessage = () => {
+  let [isVisible, setIsVisible] = useState(true); // this returns an arrayy
+
+  function toggle() {
+    setIsVisible(!isVisible);
+  }
+
+  return (
+    <div>
+      <button onClick={toggle}>
+        Toggle Message
+      </button>
+      {isVisible && <p>This message is conditionally rendered!!</p>}
+    </div>
+  )
+
+}
+
+
 
 const style = {
   width: 200,
