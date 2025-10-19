@@ -1,4 +1,5 @@
 import { useState } from "react"
+import PostComponent from "./Post.jsx";
 
 function App() {
 
@@ -6,19 +7,12 @@ function App() {
     <>
       <div style={{background: "#dfe6e9", height: "100vh"}}>
         <ToggleMessage />
+        <Notification />
+        <PostComponent />
         <div style={{
           display: "flex", justifyContent: "left"
         }}>
           <ProfileComponent />
-        </div>
-        
-        <div style={{display: "flex", justifyContent: "center"}}>
-        <PostComponent />
-        <br />
-        <PostComponent />
-        <br />
-        <PostComponent />
-        <br />
         </div>
       </div>
     </>
@@ -43,6 +37,21 @@ const ToggleMessage = () => {
 
 }
 
+const Notification = () => {
+  let [ notificationCount, setNotificationCount] = useState(0);
+
+  function increment() {
+    setNotificationCount(notificationCount + 1);
+  }
+
+  return (
+    <div>
+      <button onClick={increment}>Notification
+      </button>
+      {notificationCount > 0 && <span>You have {notificationCount} new notifications</span>}
+    </div>
+  )
+}
 
 
 const style = {
@@ -54,31 +63,31 @@ const style = {
   padding: 20
 }
 
-function PostComponent() {
-  return (
-    <div style={style}>
-    <div style={{display: "flex"}}>
-      <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjxhOxB-AhzpZ5M55ItVi7vEVt__zg0W4-hw&s"} style={{
-        width: 50,
-        height: 50,
-        borderRadius:40,
-      }} />
-    </div>
-    <div style={{fontSize:10, margin: 5}}>
-      <b>
-        100xDevs
-      </b>
-      <div>23,888 followers</div>
-      <div>12M</div>
-    </div>
-    <div>
-        Want to know how to win big? Check out how these folks won $500 in bounties.
-    </div>
-    </div>
+// function PostComponent() {
+//   return (
+//     <div style={style}>
+//     <div style={{display: "flex"}}>
+//       <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjxhOxB-AhzpZ5M55ItVi7vEVt__zg0W4-hw&s"} style={{
+//         width: 50,
+//         height: 50,
+//         borderRadius:40,
+//       }} />
+//     </div>
+//     <div style={{fontSize:10, margin: 5}}>
+//       <b>
+//         100xDevs
+//       </b>
+//       <div>23,888 followers</div>
+//       <div>12M</div>
+//     </div>
+//     <div>
+//         Want to know how to win big? Check out how these folks won $500 in bounties.
+//     </div>
+//     </div>
 
-  )
+//   )
 
-}
+// }
 
 function ProfileComponent() {
   return (
