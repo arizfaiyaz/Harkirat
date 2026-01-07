@@ -6,22 +6,11 @@ function App() {
   return (
     <>
       <div style={{background: "grey", height: "100vh"}}>
-        <ToggleMessage />
-        <Notification />
-        <PostComponent />
         <div style={{
           display: "flex", justifyContent: "left"
         }}>
-        <ProfileComponent />
-        <Card>
-          Hey!! There
-        </Card>
-        <Card>
-          <div style={{color: "white"}}>
-          what do you want to post? <br /><br />
-          <input type={"text"} />
-          </div>
-        </Card>
+
+
         </div>
       </div>
     </>
@@ -34,6 +23,19 @@ function App() {
 
 
 
+
+function Card1 () {
+
+
+  return <div style={{background: "black", borderRadius: 15, padding: 10, margin: 10, color: "white"}}>
+    Hi there!!!
+  </div>
+}
+function Card2 () {
+  return <div style={{background: "black", borderRadius: 15, padding: 10, margin: 10, color: "white"}}>
+    Hi there!!!
+  </div>
+}
 function Card({ children }){
   return (
     <div style={{background: "black", borderRadius: 10, color: "white", padding: 10, margin: 10}}>
@@ -41,8 +43,6 @@ function Card({ children }){
     </div>
   )
 }
-
-
 const ToggleMessage = () => {
   let [isVisible, setIsVisible] = useState(true); // this returns an arrayy
 
@@ -60,7 +60,6 @@ const ToggleMessage = () => {
   )
 
 }
-
 const Notification = () => {
   let [ notificationCount, setNotificationCount] = useState(0);
 
@@ -76,8 +75,6 @@ const Notification = () => {
     </div>
   )
 }
-
-
 const style = {
   width: 200,
   backgroundColor: "white",
