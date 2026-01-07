@@ -5,19 +5,43 @@ function App() {
 
   return (
     <>
-      <div style={{background: "#dfe6e9", height: "100vh"}}>
+      <div style={{background: "grey", height: "100vh"}}>
         <ToggleMessage />
         <Notification />
         <PostComponent />
         <div style={{
           display: "flex", justifyContent: "left"
         }}>
-          <ProfileComponent />
+        <ProfileComponent />
+        <Card>
+          Hey!! There
+        </Card>
+        <Card>
+          <div style={{color: "white"}}>
+          what do you want to post? <br /><br />
+          <input type={"text"} />
+          </div>
+        </Card>
         </div>
       </div>
     </>
   )
 }
+
+
+
+
+
+
+
+function Card({ children }){
+  return (
+    <div style={{background: "black", borderRadius: 10, color: "white", padding: 10, margin: 10}}>
+      {children}
+    </div>
+  )
+}
+
 
 const ToggleMessage = () => {
   let [isVisible, setIsVisible] = useState(true); // this returns an arrayy

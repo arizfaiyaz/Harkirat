@@ -5,7 +5,7 @@ export default function PostComponent({name, subtitle, time, image, description}
         <div style={style}>
             <div style={{display: "flex"}}>
                 <img src={image} style={{
-                    width: 30,
+                    width: 30, 
                     height: 30,
                     borderRadius: 20,
                 }} />
