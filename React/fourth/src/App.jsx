@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Clock from './Clock';
 import { useRef } from 'react';
+import Clocks from './Clocks';
 
 function App() {
   const inputRef = useRef();
@@ -34,6 +35,7 @@ function App() {
     </div>
     <div>
       <Clock />
+      <Clocks />
     </div>
     </>
   )
