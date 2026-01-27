@@ -1,6 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
+  
+  function focusOnInput () {
+    document.getElementById("name").focus();
+  }
+  
   return (
     <>
     <div>
@@ -20,7 +25,7 @@ function App() {
       <br />
       <input type={"text"} />
       <br />
-      <button type="button">submit</button>
+      <button onClick={focusOnInput} type="button">submit</button>
 
 
 
