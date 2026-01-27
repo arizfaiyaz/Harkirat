@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import Clock from './Clock';
 import { useRef } from 'react';
 
 function App() {
@@ -31,10 +31,9 @@ function App() {
       <br />
       <button onClick={focusOnInput} type="button">submit</button>
 
-
-
-
-
+    </div>
+    <div>
+      <Clock />
     </div>
     </>
   )
