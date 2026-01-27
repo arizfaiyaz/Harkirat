@@ -4,14 +4,28 @@ function App() {
   return (
     <>
     <div>
-      <BrowserRouter>
+      {/* <BrowserRouter>
       <Routes>
         <Route path="/neet/online-class-11" element={<Class11Program />}/>
         <Route path="/neet/online-class-12" element={<Class12Program />}/>
         <Route path="/" element={<Landing />}/>
         <Route path="*" element={<ErrorPage />}/>
       </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+
+
+      sign up
+      <br />
+      <input id="name" type={"text"} />
+      <br />
+      <input type={"text"} />
+      <br />
+      <button type="button">submit</button>
+
+
+
+
+
     </div>
     </>
   )
