@@ -1,9 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { useRef } from 'react';
+
 function App() {
-  
+  const inputRef = useRef();
+
   function focusOnInput () {
     document.getElementById("name").focus();
+    inputRef.current.focus();
   }
   
   return (
@@ -17,11 +21,11 @@ function App() {
         <Route path="*" element={<ErrorPage />}/>
       </Routes>
       </BrowserRouter> */}
-
-
+    </div>
+    <div>
       sign up
       <br />
-      <input id="name" type={"text"} />
+      <input ref={inputRef} id="name" type={"text"} />
       <br />
       <input type={"text"} />
       <br />
