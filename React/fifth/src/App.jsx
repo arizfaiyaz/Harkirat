@@ -1,6 +1,7 @@
 import { useState } from "react"
 
-function App() {       // rolling up all the components into one main app component
+function App() {       
+  // rolling up all the components into one main app component
 
   // rolling up the state
   // it is good to keep the states that would be shared between the components in the common parent component or least common ancestor component/
@@ -59,3 +60,20 @@ function ToggleBulbState({ setbulbOn } ) {
 }
 
 export default App
+
+// ---------------Prop drilling ------------
+// prop drilling is the process of passing data from a parent component to a child component through multiple layers of intermediate components.
+// in this example, we have a LightBulb component that contains the bulbOn state and two child components: BulbState and ToggleBulbState.
+// libraries like Redux or Context API to manage the state more efficiently.
+// but for small applications, lifting state up is a simple and effective way to manage state.
+// example of prop drilling:
+// function IntermediateComponent({ bulbOn, setbulbOn }) {
+//   return (
+//     <>
+//     <div>
+//       <BulbState bulbOn={bulbOn} />
+//       <ToggleBulbState setbulbOn={setbulbOn}/>
+//     </div>
+//     </>
+//   )
+// }
