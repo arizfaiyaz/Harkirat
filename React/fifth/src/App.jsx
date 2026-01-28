@@ -2,6 +2,7 @@ import { useState } from "react"
 
 function App() {       // rolling up all the components into one main app component
 
+  // rolling up the state
   // it is good to keep the states that would be shared between the components in the common parent component or least common ancestor component/
   // this way the states can be passed down as props to the child components that need them.
   // here the bulbOn state is needed in both BulbState and ToggleBulbState components so we keep it in the LightBulb component which is their common parent component.
