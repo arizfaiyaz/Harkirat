@@ -46,14 +46,14 @@ function BulbState({ bulbOn }) {
 }
 
 function ToggleBulbState({ setbulbOn } ) {
-  
+  /*  
   function toggle() {
     setbulbOn(prevbulbOn => !prevbulbOn);
-  }
+  } */
   return (
     <>
     <div>
-      <button onClick={toggle}>Toggle the bulb</button>
+      <button onClick={() => setbulbOn(prevbulbOn => !prevbulbOn)}>Toggle the bulb</button>
     </div>
     </>
   )
