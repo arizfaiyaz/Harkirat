@@ -1,30 +1,45 @@
-import { useState } from "react"
+
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
+import { counterAtom } from "./store/atoms/counter";
 
 function App() {
   return (
     <>
       <div>
         Hi there!!
-        <Counter />
+        <RecoilRoot>
+          <Counter />
+        </RecoilRoot>
       </div>
     </>
   )
 }
 
 function Counter() {
-  const [count, setCount] = useState(0);
+  
   return (
     <>
     <div>
-      {count}
-      <Increase setCount={setCount}/>
-      <Decrease setCount={setCount }/>
+      <CurrentCount />
+      <Increase />
+      <Decrease />
     </div>
     </>
   )
 }
+function CurrentCount() {
+  const Count = useRecoilValue(counterAtom);
+  return (
+    <>
+    <div>
+      {Count}
+    </div>
+    </>
+  )
+}
+function Increase() {
 
-function Increase({ setCount }) {
+  const setCount = useSetRecoilState(counterAtom);
   function increase() {
     setCount(c => c + 1);
   }
@@ -36,7 +51,8 @@ function Increase({ setCount }) {
     </>
   )
 }
-function Decrease({ setCount }) {
+function Decrease() {
+  const setCount = useSetRecoilState(counterAtom);
   function decrease() {
     setCount(c => c - 1);
   }
@@ -51,6 +67,8 @@ function Decrease({ setCount }) {
 
 export default App
 
+
+// recoil is unsupported in react 19 now
 
 
 
