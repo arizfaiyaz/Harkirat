@@ -2,9 +2,9 @@ let x: number = 10;
 
 console.log(x);
 
-function greet(name : string) {
-    console.log(`Hello ${name}`);
-}
+// function greet(name : string) {
+//     console.log(`Hello ${name}`);
+// }
 
 greet("World");
 
@@ -24,3 +24,12 @@ function isLegalAge(age: number) : boolean {
 
 console.log(isLegalAge(25));
 
+function delayed(fn: (a: string)=> void) {
+    setTimeout(fn, 5000);
+}
+
+function greet(name : string){
+    console.log("Hello " + name);
+};
+
+delayed(() => greet("Alice"));
