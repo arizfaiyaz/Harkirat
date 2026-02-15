@@ -13,3 +13,14 @@ function add(a : number, b: number) {
 }
 
 add(15, 7);
+
+function isLegalAge(age: number) : boolean {
+    if (age >= 18) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+console.log(isLegalAge(25));
+

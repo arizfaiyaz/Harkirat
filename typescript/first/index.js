@@ -10,4 +10,13 @@ function add(a, b) {
     return a + b;
 }
 add(15, 7);
+function isLegalAge(age) {
+    if (age >= 18) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+console.log(isLegalAge(25));
 //# sourceMappingURL=index.js.map
