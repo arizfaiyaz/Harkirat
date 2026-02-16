@@ -34,3 +34,21 @@
 
 // another way to do it is like this by using interface
 
+interface userType {
+    firstName: string,
+    lastName: string,
+    age: number
+}
+
+function greet(user : userType) {
+    console.log("Hello " + user.firstName + " " + user.lastName);
+    console.log("Your age is " + user.age);
+}
+
+let user = {
+    firstName: "Alice",
+    lastName: "Smith",
+    age: 30
+};
+
+greet(user);
