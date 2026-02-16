@@ -47,8 +47,8 @@ console.log(isEven(15));
 interface User {
     name: string,
     age: number,
-    address: {
-        city: string,
+    address?: { // ? makes it optional
+        city?: string, // if address is provided, city is optional
         country: string,
         pin: number
     }
@@ -62,6 +62,11 @@ let user : User = {
         country: "USA",
         pin: 12345
     }
+}
+
+let user2 : User = {
+    name: "Bob",
+    age: 17,
 }
 
 function isLegal(user: User) : boolean {
@@ -78,3 +83,4 @@ if (ans) {
 } else {
     console.log("User is not legal");
 };
+
