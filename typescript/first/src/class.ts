@@ -3,5 +3,17 @@ interface People {
     age: number,
     greet: () => string,
 
-    greet2() : string
 }
+
+let person: People = {
+    name: "Ariz",
+    age: 21,
+    greet: () => {
+        return "hi"
+    }
+
+}
+
+let greet = console.log(person.greet());
+
+
