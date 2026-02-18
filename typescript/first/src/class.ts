@@ -17,3 +17,4 @@ let person: People = {
 let greet = console.log(person.greet());
 
 
+
