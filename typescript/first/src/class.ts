@@ -16,5 +16,11 @@ let person: People = {
 
 let greet = console.log(person.greet());
 
+interface People {
+    name: string,
+    age: number,
+    greet: () => string,
+}
+
 
 
