@@ -17,6 +17,8 @@ function greet(user: UserOrAdmin) {
     return `Welcome, ${user.name}`;
 }
 
+console.log(greet({name: "Alice", age: 30}));
+console.log(greet({name: "Bob", permissions: "all"}));
 
 
 
